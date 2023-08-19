@@ -1,5 +1,4 @@
 import Game from './classes/Game';
-import Player from './classes/Player';
 import './style.css'
 
 window.addEventListener("load", () => {
@@ -12,8 +11,9 @@ window.addEventListener("load", () => {
   ctx.lineWidth = 3
   ctx.strokeStyle = 'white'
 
-  const game = new Game(canvas, Player)
-
+  const game = new Game(canvas)
+  game.init()
+  console.log(game);
 
 
   function animate() {

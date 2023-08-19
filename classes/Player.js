@@ -6,6 +6,9 @@ class Player {
     this.collissionRadius = 30
     this.speedX = 0
     this.speedY = 0
+    this.dx = 0;
+    this.dy = 0;
+    this.speedModifier = 5;
   }
   draw(context){
     context.beginPath();
@@ -21,10 +24,19 @@ class Player {
     context.stroke()
   }
   update(){
-    this.speedX = this.game.mouse.x - this.collissionX;
-    this.speedY = this.game.mouse.y - this.collissionY;
-    this.collissionX += this.speedX
-    this.collissionY += this.speedY
+    this.dx = this.game.mouse.x - this.collissionX
+    this.dy = this.game.mouse.y - this.collissionY
+    const distance = Math.hypot(this.dy, this.dx)
+    if(distance > this.speedModifier){
+      this.speedX = this.dx / distance || 0;
+      this.speedY = this.dy / distance || 0;
+
+    } else {
+      this.speedX = 0
+      this.speedY = 0
+    }
+    this.collissionX += this.speedX * 5
+    this.collissionY += this.speedY * 5
   }
 }
 
