@@ -38,6 +38,13 @@ class Game {
     this.player.update();
     this.obstacles.forEach((obstacle) => obstacle.draw(context));
   }
+  checkCollision(a, b){
+    const dx = a.collissionX - b.collissionX
+    const dy = a.collissionY - b.collissionY
+    const distance = Math.hypot(dy, dx)
+    const sumOfRadii = a.collissionRadius + b.collissionRadius
+    return [distance < sumOfRadii, distance, sumOfRadii, dx, dy]
+  }
   init() {
     let attempts = 0;
     while (this.obstacles.length < this.noOfObstacles && attempts < 500) {
@@ -69,7 +76,6 @@ class Game {
       }
       attempts++;
     }
-    console.log(attempts);
   }
 }
 export default Game;

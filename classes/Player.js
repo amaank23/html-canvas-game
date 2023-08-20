@@ -37,6 +37,16 @@ class Player {
     }
     this.collissionX += this.speedX * 5
     this.collissionY += this.speedY * 5
+
+    this.game.obstacles.forEach(obstacle => {
+      const [collision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, obstacle)
+      if(collision){
+        const unit_x = dx / distance
+        const unit_y = dy / distance
+        this.collissionX = obstacle.collissionX + (sumOfRadii + 1) * unit_x
+        this.collissionY = obstacle.collissionY + (sumOfRadii + 1) * unit_y
+      }
+    })
   }
 }
 
